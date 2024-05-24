@@ -76,7 +76,7 @@ def file_upload_handler(event, context):
     sqs.send_message(QueueUrl=SQS_QUEUE_URL,
                      MessageBody=filename)
     return {
-        'statusCode': HTTPStatus.OK.value,
+        'statusCode': HTTPStatus.ACCEPTED.value,
         'body': json.dumps({'message': 'Image uploaded successfully'})
     }
 
