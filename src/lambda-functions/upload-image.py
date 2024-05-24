@@ -56,11 +56,11 @@ def file_upload_handler(event, context):
                 })
             }
     except Exception as e:
+        print(e)
         return {
             "statusCode": HTTPStatus.BAD_REQUEST.value,
             "body": json.dumps({
                                 "error_description": "Error processing the image",
-                                "traceback": e
             })
         }
 
