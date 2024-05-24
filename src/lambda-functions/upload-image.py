@@ -50,14 +50,14 @@ def file_upload_handler(event, context):
         img = Image.open(image_bytes)
         if img.format not in ['PNG', 'JPEG']:
             return {
-                "status": HTTPStatus.BAD_REQUEST.value,
+                "statusCode": HTTPStatus.BAD_REQUEST.value,
                 "body": json.dumps({
                     "error_description": "Invalid image format. Only PNG and JPEG formats are allowed"
                 })
             }
     except Exception as e:
         return {
-            "status": HTTPStatus.BAD_REQUEST.value,
+            "statusCode": HTTPStatus.BAD_REQUEST.value,
             "body": json.dumps({
                                 "error_description": "Error processing the image",
                                 "traceback": e
