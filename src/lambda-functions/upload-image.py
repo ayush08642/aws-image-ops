@@ -3,7 +3,7 @@ Lambda function for handling the file upload to S3 and adding a message to
 SQS for thumbnail generation, use-case.
 '''
 
-
+import base64
 import boto3
 from http import HTTPStatus
 from io import BytesIO
@@ -16,6 +16,17 @@ SQS_QUEUE_URL = os.getenv['SQS_QUEUE_URL']
 
 s3 = boto3.client('s3')
 sqs = boto3.client('sqs')
+
+
+def is_base64_encoded(data):
+    try:
+        # Attempt to decode the data
+        decoded_data = base64.b64decode(data)
+        # If decoding succeeds, return True
+        return True
+    except:
+        # If decoding fails, return False
+        return False
 
 
 def file_upload_handler(event, context):
@@ -41,6 +52,10 @@ def file_upload_handler(event, context):
     '''
     # Getting the image data from the event object.
     image_data = event['image_data']
+
+    # Check if image data is base64 encoded, if True, decode.
+    if is_base64_encoded(image_data):
+        image_data = base64.b64decode(image_data)
 
     # Decode the image data.
     image_bytes = BytesIO(image_data)
