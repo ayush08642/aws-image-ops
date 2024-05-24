@@ -14,11 +14,11 @@ IMAGE_UPLOAD_BUCKET_S3 = os.environ['IMAGE_UPLOAD_BUCKET_S3']
 s3 = boto3.client('s3')
 
 
-def lambda_handler(event, context):
+def download_image_handler(event, context):
     '''\
-    This function takes This function takes filename key from the 
-    request inside the event object and uses it get the image from the 
-    s3 bucket and return as part of the response.
+    This function takes filename key from the request inside the event 
+    object and uses it get the image from the s3 bucket and return as 
+    part of the response.
     
     Args:
         event: An event is a JSON-formatted document that contains 
